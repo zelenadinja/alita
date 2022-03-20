@@ -74,7 +74,7 @@ def scrape_img_to_s3(job_type: str, limit: int) -> bool:
 
     try:
         response = requests.get(image_url)
-    except:
+    except ValueError:
         raise ValueError("Something went wrong!")
 
     image_stream = io.BytesIO(response.content)

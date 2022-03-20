@@ -1,5 +1,4 @@
 import os
-from typing import List
 
 import boto3
 from boto3_type_annotations.s3 import Client
