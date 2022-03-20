@@ -1,0 +1,6 @@
+boto3==1.21.22
+boto3_type_annotations==0.3.1
+botocore==1.24.22
+praw==7.5.0
+Flask==2.0.3
+python-dotenv==0.19.2

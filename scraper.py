@@ -1,6 +1,5 @@
 import io
 import os
-from typing import List
 
 import boto3
 import numpy as np
