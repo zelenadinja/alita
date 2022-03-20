@@ -1,1 +1,0 @@
-s3bucket_name = "alita-webapp"
