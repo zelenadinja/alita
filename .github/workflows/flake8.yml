@@ -1,23 +1,17 @@
-name: Code Quality
-
-on:
-  push:
-    paths:
-      - "**.py"
+on: [push, pull_request]
 
 jobs:
-  lint:
-    name: Python Lint
+  python-lint:
     runs-on: ubuntu-latest
+    name: CI workflow
     steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-python@v2
-        with:
-          python-version: "3.9"
-      - name: Run flake8
-        uses: julianwachholz/flake8-action@v2
-        with:
-          checkName: "Python Lint"
-          plugins: flake8-spellcheck
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+    - name: checkout source repo
+      uses: actions/checkout@v2
+
+    - name: linting
+      uses: programmingwithalex/pylinter@v1.4.2
+      with:
+        python-root: '.'
+        flake8-flags: ''
+        mypy-flags: '--ignore-missing-imports'
+        fail-on-isort: true
