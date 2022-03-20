@@ -1,15 +1,14 @@
-import os
 import io
+import os
 from typing import List
-import requests
 
 import boto3
-import praw
-from dotenv import load_dotenv
 import numpy as np
-from botocore.exceptions import ClientError
+import praw
+import requests  # type: ignore
 from boto3_type_annotations.s3 import Client
-
+from botocore.exceptions import ClientError
+from dotenv import load_dotenv
 
 load_dotenv()
 
@@ -65,18 +64,18 @@ def scrape_img_to_s3(job_type: str, limit: int) -> bool:
             extensions.append(extension)
 
     num_urls = len(ulrs)
-    random_idx: List[int] = np.random.randint(
+    random_idx: int = np.random.randint(
         low=0,
         high=num_urls,
         size=1,
-        dtype=int)
-    image_url = ulrs[random_idx[0]]
-    image_ext = extensions[random_idx[0]]
+        dtype=int)[0]
+    image_url = ulrs[random_idx]
+    image_ext = extensions[random_idx]
     image_name = image_url.split(image_ext)[0].split("/")[-1]
 
     try:
         response = requests.get(image_url)
-    except requests.exceptions:
+    except:
         raise ValueError("Something went wrong!")
 
     image_stream = io.BytesIO(response.content)
